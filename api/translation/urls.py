@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import ListTranslationsView
+from .views import ListCreateTranslationsView
 
 
 urlpatterns = [
-    path('translations/', ListTranslationsView.as_view(), name="translations-all")
+    path('translations/', ListCreateTranslationsView.as_view(), name="translations-list-create"),
 ]
+
