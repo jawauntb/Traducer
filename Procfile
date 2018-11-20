@@ -1,1 +1,0 @@
-web: gunicorn translation_service/api.wsgi

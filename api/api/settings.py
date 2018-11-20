@@ -25,7 +25,7 @@ SECRET_KEY = 'kts&mnu)slhpy4$dsx1k(z6$sch1nn@$$t=#22p+v(*%e24&w)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'traducer.herokuapp.com']
 
 
 # Application definition
