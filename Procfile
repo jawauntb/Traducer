@@ -1,1 +1,1 @@
-web: gunicorn translation_service.wsgi
+web: gunicorn api.wsgi
