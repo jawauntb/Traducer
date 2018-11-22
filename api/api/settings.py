@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'My Project-09af8ab5b26a.json'
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +26,7 @@ SECRET_KEY = 'kts&mnu)slhpy4$dsx1k(z6$sch1nn@$$t=#22p+v(*%e24&w)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'traducer.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'django-env.6gwinyghki.us-east-1.elasticbeanstalk.com', '127.0.0.1', 'localhost', 'traducer.herokuapp.com']
 
 
 # Application definition
@@ -130,8 +131,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'build/static'),
+  os.path.join(BASE_DIR, 'build/static/*'),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'build/static')
+
 # Activate Django-Heroku.
-django_heroku.settings(locals())

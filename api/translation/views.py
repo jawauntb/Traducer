@@ -4,18 +4,27 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Translations
 from .serializers import TranslationSerializer
-from googletrans import Translator
 from rest_framework.response import Response
 from rest_framework.views import status
+from google.cloud import translate
+import os
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'translation/My Project-09af8ab5b26a.json'
+
+# client.translate('koszula')
+# {
+#     'translatedText': 'shirt',
+#     'detectedSourceLanguage': 'pl',
+#     'input': 'koszula',
+# }
 
 
 # Create your views here.
 def translates(input_text):
-    # # <Translated src=ko dest=en text=Good evening. pronunciation=Good evening.>
     txt = input_text
-    translator = Translator()
-    translation = translator.translate(txt, dest='en')
-    trans = {'language': translation.src, 'eng': translation.text}
+    translate_client = translate.Client()
+    translation = translate_client.translate(txt, target_language='en')
+    trans = {'language': translation['detectedSourceLanguage'], 'eng': translation['translatedText']}
     return [trans['language'], trans['eng']]
 
 
@@ -38,3 +47,4 @@ class ListCreateTranslationsView(generics.ListCreateAPIView):
             data=TranslationSerializer(a_trans).data,
             status=status.HTTP_201_CREATED
         )
+
