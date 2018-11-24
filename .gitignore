@@ -1,2 +1,7 @@
 #ignore all env/ files
 env/
+
+#ignore credentials
+api/translation/My\ Project-09af8ab5b26a.json
+
+api/api/My\ Project-09af8ab5b26a.json
