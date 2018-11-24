@@ -8,5 +8,5 @@ router.register('translations', TranslationsView, base_name='Translations')
 urlpatterns = router.urls
 #     # path('translations', ListCreateTranslationsView.as_view(), name="translations-list-create"),
 #     # path('translations/<int:pk>', RetrieveUpdateDestroyTranslationsView.as_view(), name="translations-detail")
-# ]
+
 
