@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, viewsets, permissions
 from .models import Translations
 from .serializers import TranslationSerializer
 from rest_framework.response import Response
@@ -28,10 +28,16 @@ def translates(input_text):
     return [trans['language'], trans['eng']]
 
 
-class ListCreateTranslationsView(generics.ListCreateAPIView):
+class TranslationsView(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
+
     """
-    GET songs/
-    POST songs/
+    GET translations/
+    POST translations/
+    PUT translations/
+    DELETE translations/
+    translations/<int>/ starts with 7 due to test model deletions
+    
     """
     queryset = Translations.objects.all()
     serializer_class = TranslationSerializer
@@ -47,4 +53,26 @@ class ListCreateTranslationsView(generics.ListCreateAPIView):
             data=TranslationSerializer(a_trans).data,
             status=status.HTTP_201_CREATED
         )
+
+    def put(self, request, *args, **kwargs):
+        translation = translates(request.data["input_text"])
+        a_trans = Translations.objects.create(
+            input_text=request.data["input_text"],
+            language=translation[0],
+            output_text=translation[1]
+        )
+        return Response(
+            data=TranslationSerializer(a_trans).data,
+            status=status.HTTP_201_CREATED
+        )
+
+
+# class RetrieveUpdateDestroyTranslationsView(generics.RetrieveUpdateDestroyAPIView):#
+#     """
+#     GET translations/
+#     PUT translations/
+#     DELETE translations/
+#     """
+#     queryset = Translations.objects.all()
+#     serializer_class = TranslationSerializer
 
