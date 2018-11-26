@@ -26,7 +26,7 @@ SECRET_KEY = 'kts&mnu)slhpy4$dsx1k(z6$sch1nn@$$t=#22p+v(*%e24&w)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'django-env.6gwinyghki.us-east-1.elasticbeanstalk.com', '127.0.0.1', 'localhost', 'traducer.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'django-env.6gwinyghki.us-east-1.elasticbeanstalk.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -131,7 +131,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'build/static/*'),
+  os.path.join(BASE_DIR, 'build/static'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'build/static')
