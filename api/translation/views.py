@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from rest_framework.views import status
 from google.cloud import translate
 import os
-from time import sleep
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'translation/My Project-09af8ab5b26a.json'
 
@@ -30,7 +29,7 @@ def translates(input_text):
 
 
 class TranslationsView(viewsets.ModelViewSet):
-    permission_classes = permissions.AllowAny
+    permission_class = permissions.AllowAny
 
     """
     GET translations/
@@ -43,31 +42,28 @@ class TranslationsView(viewsets.ModelViewSet):
     queryset = Translations.objects.all()
     serializer_class = TranslationSerializer
 
-    def post(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         translation = translates(request.data["input_text"])
-        sleep(0.5)
         a_trans = Translations.objects.create(
             input_text=request.data["input_text"],
             language=translation[0],
             output_text=translation[1]
         )
-        sleep(0.002)
+
         return Response(
             data=TranslationSerializer(a_trans).data,
             status=status.HTTP_201_CREATED
         )
 
-    def put(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         translation = translates(request.data["input_text"])
-        sleep(0.5)
-        a_trans = Translations.objects.create(
+        trans = Translations.objects.create(
             input_text=request.data["input_text"],
             language=translation[0],
             output_text=translation[1]
         )
-        sleep(0.002)
         return Response(
-            data=TranslationSerializer(a_trans).data,
+            data=TranslationSerializer(trans).data,
             status=status.HTTP_201_CREATED
         )
 
