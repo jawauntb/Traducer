@@ -42,6 +42,8 @@ class TranslationsView(viewsets.ModelViewSet):
     queryset = Translations.objects.all()
     serializer_class = TranslationSerializer
 
+    # jackpot below! just changed it around a bit
+
     def create(self, request, *args, **kwargs):
         translation = translates(request.data["input_text"])
         a_trans = Translations.objects.create(
