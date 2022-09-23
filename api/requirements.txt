@@ -14,7 +14,7 @@ googleapis-common-protos==1.5.5
 googletrans==2.3.0
 gunicorn==19.9.0
 idna==2.7
-protobuf==3.6.1
+protobuf==3.18.3
 psycopg2==2.7.6.1
 pyasn1==0.4.4
 pyasn1-modules==0.2.2
